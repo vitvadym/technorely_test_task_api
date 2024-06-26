@@ -1,15 +1,15 @@
 import { Request, Response } from 'express';
-import * as userServive from '../services/auth.service';
+import * as authServive from '../services/auth.service';
 
 const signUp = async (req: Request, res: Response) => {
-  const newUser = await userServive.register(req.body);
+  const newUser = await authServive.register(req.body);
 
   res.status(201).json(newUser);
 };
 
 const signIn = async (req: Request, res: Response) => {
   const { email, password } = req.body;
-  const user = await userServive.login(email, password);
+  const user = await authServive.login(email, password);
 
   res.status(200).json(user);
 };
