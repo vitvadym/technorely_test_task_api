@@ -3,7 +3,7 @@ import { ObjectSchema } from 'joi';
 import { AppError } from './AppError';
 
 const validateBody = (shema: ObjectSchema) => {
-  return (req: Request, res: Response, next: NextFunction) => {
+  return (req: Request, _: Response, next: NextFunction) => {
     const { error } = shema.validate(req.body);
 
     if (error) {

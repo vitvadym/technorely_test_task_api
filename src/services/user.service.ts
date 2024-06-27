@@ -1,6 +1,7 @@
 import { prisma } from '../../prisma/prisma';
 import { AppError } from '../middleware/AppError';
 import { IUser } from '../types/user';
+import bcrypt from 'bcrypt';
 
 const getAll = async () => {
   const users = await prisma.user.findMany();
@@ -61,7 +62,9 @@ const updateOne = async (id: number, data: IUser) => {
     throw new AppError('User not found', 404);
   }
 
-  await prisma.user.update({
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const updatedUser = await prisma.user.update({
     where: {
       id,
     },
@@ -72,10 +75,11 @@ const updateOne = async (id: number, data: IUser) => {
       lastName,
       position,
       phoneNumber,
-      password,
       nickName,
+      password: hashedPassword,
     },
   });
+  return updatedUser;
 };
 
 export { getAll, getOne, deleteOne, updateOne };

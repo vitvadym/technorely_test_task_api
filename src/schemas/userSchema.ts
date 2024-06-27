@@ -2,7 +2,7 @@ import Joi from 'joi';
 
 const userRegisterSchema = Joi.object({
   email: Joi.string().email().required(),
-  password: Joi.string().min(8).required(),
+  password: Joi.string().min(6).required(),
   firstName: Joi.string().min(3).required(),
   lastName: Joi.string().min(3).required(),
   position: Joi.string().optional(),
@@ -13,7 +13,7 @@ const userRegisterSchema = Joi.object({
 
 const userLoginSchema = Joi.object({
   email: Joi.string().email().required(),
-  password: Joi.string().min(8).required(),
+  password: Joi.string().min(6).required(),
 });
 
 export { userRegisterSchema, userLoginSchema };

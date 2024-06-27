@@ -26,7 +26,6 @@ const register = async (user: IUser) => {
     throw new AppError('User already exist', 404);
   }
   const hashedPassword = await bcrypt.hash(password, 10);
-  const token = createToken(email);
 
   const newUser = await prisma.user.create({
     data: {
@@ -40,6 +39,8 @@ const register = async (user: IUser) => {
       password: hashedPassword,
     },
   });
+
+  const token = createToken(newUser.id, newUser.email);
 
   return { ...newUser, token };
 };
@@ -61,7 +62,7 @@ const login = async (email: string, password: string) => {
     throw new AppError('Wrong credentials', 404);
   }
 
-  const token = createToken(email);
+  const token = createToken(existedUser.id, existedUser.email);
   return {
     ...existedUser,
     token,
