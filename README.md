@@ -79,14 +79,14 @@ This API allows user authentication, profile management, and company management.
    - **Description**: Delete a specific company.
   
    ## Technologies Used
-   -**Backend**
+   **Backend**
   - Node.js
   - Express
-
-  - **Database:**
+  
+   **Database:**
   - PostgreSQL
-
-  - **Tools and Libraries:**
+  
+   **Tools and Libraries:**
   - Prisma
   - Joi
   - bcrypt
