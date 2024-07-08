@@ -5,6 +5,7 @@ import {
   getCompanyById,
   deleteCompany,
   updateCompany,
+  getMyCompanies,
 } from '../controllers/company.controller';
 import checkAuth from '../middleware/checkAuth';
 import tryCatch from '../middleware/tryCatch';
@@ -13,8 +14,9 @@ import companyShema from '../schemas/companySchema';
 
 const router = Router();
 
-router.get('/', checkAuth, tryCatch(getCompanies));
+router.get('/all', checkAuth, tryCatch(getCompanies));
 router.get('/:companyId', checkAuth, tryCatch(getCompanyById));
+router.get('/my/:userId', checkAuth, tryCatch(getMyCompanies));
 
 router.post(
   '/create',
@@ -24,7 +26,7 @@ router.post(
 );
 router.delete('/:companyId', checkAuth, tryCatch(deleteCompany));
 router.put(
-  '/:companyId',
+  '/edit/:companyId',
   checkAuth,
   validateBody(companyShema),
   tryCatch(updateCompany),

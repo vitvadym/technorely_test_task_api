@@ -4,10 +4,7 @@ import * as authServive from '../services/auth.service';
 const signUp = async (req: Request, res: Response) => {
   const newUser = await authServive.register(req.body);
 
-  res
-    .status(201)
-    .cookie('token', newUser.token, { httpOnly: true })
-    .json(newUser);
+  res.status(201).json(newUser);
 };
 
 const signIn = async (req: Request, res: Response) => {

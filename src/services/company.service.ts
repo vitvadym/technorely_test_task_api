@@ -2,8 +2,49 @@ import { prisma } from '../../prisma/prisma';
 import { AppError } from '../middleware/AppError';
 import { ICompany } from '../types/company';
 
-const getAll = async () => {
-  const companies = await prisma.company.findMany();
+interface QueryString {
+  skip?: string;
+  limit?: string;
+  search?: string;
+}
+
+const getAll = async (query: QueryString) => {
+  console.log(query);
+  const { skip = 0, limit = 6, search = '' } = query;
+  const count = await prisma.company.count();
+
+  const companies = await prisma.company.findMany({
+    skip: Number(skip),
+    take: Number(limit),
+    orderBy: [{ name: 'asc' }, { serviceOfActivity: 'asc' }],
+    where: {
+      OR: [
+        {
+          name: {
+            contains: search,
+            mode: 'insensitive',
+          },
+        },
+
+        {
+          type: {
+            contains: search,
+            mode: 'insensitive',
+          },
+        },
+      ],
+    },
+  });
+  return { companies, count };
+};
+
+const getMy = async (userId: number) => {
+  const companies = await prisma.company.findMany({
+    where: {
+      userId,
+    },
+  });
+
   return companies;
 };
 
@@ -124,4 +165,4 @@ const updateOne = async (id: number, company: ICompany) => {
   return updatedCompany;
 };
 
-export { createOne, deleteOne, getAll, getOne, updateOne };
+export { createOne, deleteOne, getAll, getOne, updateOne, getMy };

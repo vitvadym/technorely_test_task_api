@@ -13,7 +13,7 @@ const createToken = (id: number, email: string) => {
     },
     secret,
     {
-      expiresIn: '1d',
+      expiresIn: '24h',
     },
   );
 

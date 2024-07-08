@@ -1,8 +1,18 @@
 import { Request, Response } from 'express';
 import * as companyService from '../services/company.service';
 
-const getCompanies = async (_: Request, res: Response) => {
-  const companies = await companyService.getAll();
+const getCompanies = async (req: Request, res: Response) => {
+  const { companies, count } = await companyService.getAll(req.query);
+  res.status(200).json({
+    companies,
+    count,
+  });
+};
+
+const getMyCompanies = async (req: Request, res: Response) => {
+  const { userId } = req.params;
+  const companies = await companyService.getMy(+userId);
+
   res.status(200).json(companies);
 };
 
@@ -39,4 +49,5 @@ export {
   createCompany,
   deleteCompany,
   updateCompany,
+  getMyCompanies,
 };

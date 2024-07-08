@@ -7,7 +7,7 @@ interface jwtPayload extends JwtPayload {
   email: string;
 }
 
-const checkAuth = (req: Request | any, res: Response, next: NextFunction) => {
+const checkAuth = (req: Request | any, _: Response, next: NextFunction) => {
   try {
     const token = req.headers.authorization?.split(' ')[1];
 

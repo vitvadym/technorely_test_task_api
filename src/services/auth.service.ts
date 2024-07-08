@@ -46,7 +46,7 @@ const register = async (user: IUser) => {
 };
 
 const login = async (email: string, password: string) => {
-  const existedUser = await prisma.user.findFirst({
+  const existedUser = await prisma.user.findUnique({
     where: {
       email,
     },
@@ -55,16 +55,25 @@ const login = async (email: string, password: string) => {
   if (!existedUser) {
     throw new AppError('User not found', 404);
   }
+  console.log(existedUser.password);
 
   const isPasswordCorect = await bcrypt.compare(password, existedUser.password);
-
   if (!isPasswordCorect) {
     throw new AppError('Wrong credentials', 404);
   }
 
+  const companies = await prisma.company.findMany({
+    where: {
+      userId: {
+        equals: existedUser.id,
+      },
+    },
+  });
+
   const token = createToken(existedUser.id, existedUser.email);
   return {
     ...existedUser,
+    companies,
     token,
   };
 };
