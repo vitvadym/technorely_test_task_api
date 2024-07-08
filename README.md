@@ -80,15 +80,15 @@ This API allows user authentication, profile management, and company management.
   
    ## Technologies Used
    
-   **Backend**
-  - Node.js
-  - Express
+   -**Backend:**
+      - Node.js
+      - Express
   
-   **Database:**
-  - PostgreSQL
+   -**Database:**
+     - PostgreSQL
   
-   **Tools and Libraries:**
-  - Prisma
-  - Joi
-  - bcrypt
-  - jsonwebtoken
+   -**Tools and Libraries:**
+     - Prisma
+     - Joi
+     - bcrypt
+     - jsonwebtoken
