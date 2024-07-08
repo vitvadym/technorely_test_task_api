@@ -9,7 +9,6 @@ interface QueryString {
 }
 
 const getAll = async (query: QueryString) => {
-  console.log(query);
   const { skip = 0, limit = 6, search = '' } = query;
   const count = await prisma.company.count();
 
