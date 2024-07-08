@@ -77,3 +77,17 @@ This API allows user authentication, profile management, and company management.
    - **Endpoint**: `/company/:id`
    - **Method**: `DELETE`
    - **Description**: Delete a specific company.
+  
+   ## Technologies Used
+   -**Backend**
+  - Node.js
+  - Express
+
+  - **Database:**
+  - PostgreSQL
+
+  - **Tools and Libraries:**
+  - Prisma
+  - Joi
+  - bcrypt
+  - jsonwebtoken
