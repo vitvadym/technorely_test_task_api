@@ -79,6 +79,7 @@ This API allows user authentication, profile management, and company management.
    - **Description**: Delete a specific company.
   
    ## Technologies Used
+   
    **Backend**
   - Node.js
   - Express
